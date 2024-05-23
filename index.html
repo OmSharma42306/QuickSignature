@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUICK SIGN</title>
+    <style>
+      .main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .canvas {
+        border: 2px solid black;
+      }
+      .button-88 {
+        display: flex;
+        align-items: center;
+        font-family: inherit;
+        font-weight: 500;
+        font-size: 16px;
+        padding: 0.7em 1.4em 0.7em 1.1em;
+        color: white;
+        background: #ad5389;
+        background: linear-gradient(
+          0deg,
+          rgba(20, 167, 62, 1) 0%,
+          rgba(102, 247, 113, 1) 100%
+        );
+        border: none;
+        box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+        letter-spacing: 0.05em;
+        border-radius: 20em;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-88:hover {
+        box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+      }
+
+      .button-88:active {
+        box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+      }
+
+      .button-82-pushable {
+        position: relative;
+        border: none;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+        outline-offset: 4px;
+        transition: filter 250ms;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-82-shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        background: hsl(0deg 0% 0% / 0.25);
+        will-change: transform;
+        transform: translateY(2px);
+        transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+      }
+
+      .button-82-edge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        background: linear-gradient(
+          to left,
+          hsl(340deg 100% 16%) 0%,
+          hsl(340deg 100% 32%) 8%,
+          hsl(340deg 100% 32%) 92%,
+          hsl(340deg 100% 16%) 100%
+        );
+      }
+
+      .button-82-front {
+        display: block;
+        position: relative;
+        padding: 12px 27px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        color: white;
+        background: hsl(345deg 100% 47%);
+        will-change: transform;
+        transform: translateY(-4px);
+        transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+      }
+
+      @media (min-width: 768px) {
+        .button-82-front {
+          font-size: 1.25rem;
+          padding: 12px 42px;
+        }
+      }
+
+      .button-82-pushable:hover {
+        filter: brightness(110%);
+        -webkit-filter: brightness(110%);
+      }
+
+      .button-82-pushable:hover .button-82-front {
+        transform: translateY(-6px);
+        transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+      }
+
+      .button-82-pushable:active .button-82-front {
+        transform: translateY(-2px);
+        transition: transform 34ms;
+      }
+
+      .button-82-pushable:hover .button-82-shadow {
+        transform: translateY(4px);
+        transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+      }
+
+      .button-82-pushable:active .button-82-shadow {
+        transform: translateY(1px);
+        transition: transform 34ms;
+      }
+
+      .button-82-pushable:focus:not(:focus-visible) {
+        outline: none;
+      }
+
+      .button-87 {
+        margin: 10px;
+        padding: 15px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        box-shadow: 0px 0px 14px -7px #f09819;
+        background-image: linear-gradient(
+          45deg,
+          #ff512f 0%,
+          #f09819 51%,
+          #ff512f 100%
+        );
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-87:hover {
+        background-position: right center;
+        /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .button-87:active {
+        transform: scale(0.95);
+      }
+      .top,
+      .lowerPart {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 20px 0px 20px 0px;
+      }
+      .block,
+      select,
+      input,
+      button {
+        width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="top">
+        <div class="block">
+          <p>Text Color Picker</p>
+          <input class="form-control" type="color" id="colorPicker" />
+        </div>
+
+        <div class="block">
+          <p>Background</p>
+          <input class="form-control" type="color" id="background" />
+        </div>
+
+        <div class="block">
+          <p>FontSize</p>
+          <select id="fontSizer">
+            <option value="5">5px</option>
+            <option value="10">10px</option>
+            <option value="20">20px</option>
+            <option value="30">30px</option>
+            <option value="40">40px</option>
+            <option value="50">50px</option>
+          </select>
+        </div>
+      </div>
+      <div id="square">
+        <canvas class="canvas" width="800" height="600"></canvas>
+      </div>
+      <div class="lowerPart">
+        <div>
+          <button class="button-82-pushable" role="button" id="clear">
+            <span class="button-82-shadow"></span>
+            <span class="button-82-edge"></span>
+            <span class="button-82-front text"> Clear </span>
+          </button>
+        </div>
+        <div>
+          <button class="button-88" role="button" id="save&download">
+            Save & Download
+          </button>
+        </div>
+
+        <div>
+          <button class="button-87" role="button" id="Retrive&Get">
+            Retrive Saved Signature
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const backGround = document.getElementById('background');
+        const fontSize = document.getElementById('fontSizer');
+        const canvas = document.querySelector('canvas');
+        const clearButton = document.getElementById('clear');
+        const saveAndDownload = document.getElementById('save&download');
+        const retriveSaved = document.getElementById('Retrive&Get');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        colorPicker.addEventListener('change',(e)=>{
+             ctx.strokeStyle = e.target.value;  
+             ctx.fillStyle = e.target.value;
+
+        })
+        canvas.addEventListener('mousedown',(e)=>{
+            isDrawing = true;
+            lastX = event.offsetX;
+            lastY = event.offsetY;
+        })
+
+        canvas.addEventListener('mousemove',(e)=>{
+            if(isDrawing){
+                ctx.beginPath();
+                ctx.moveTo(lastX,lastY);
+                ctx.lineTo(event.offsetX,event.offsetY);
+                ctx.stroke();
+                lastX = event.offsetX;
+                lastY = event.offsetY;
+            }
+        })
+        canvas.addEventListener('mouseup',()=>{
+            isDrawing = false;
+        })
+
+        fontSize.addEventListener('click',(e)=>{
+            ctx.lineWidth = e.target.value;
+        })
+        clearButton.addEventListener('click',()=>{
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+        })
+
+        saveAndDownload.addEventListener('click',()=>{
+            const dataURL = canvas.toDataURL('image/png');
+            localStorage.setItem('savedSignature', dataURL);  // Save to localStorage
+            const link = document.createElement('a');   // create anchor tag 
+            link.download = 'signature.png';
+            link.href = canvas.toDataURL('image'); // converts canvas to image or png
+            link.click(); // Trigger the download: link.click() simulates a click on the link, triggering the download.
+        })
+        
+        retriveSaved.addEventListener('click',()=>{
+            const dataURL = localStorage.getItem('savedSignature'); 
+            if(dataURL){
+                const img = new Image();
+                img.src = dataURL;
+                img.onload = ()=>{
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.drawImage(img,0,0)
+                }
+            }
+            else{
+                alert('No Saved Signature Found!!');
+            }
+        })
+    </script>
+  </body>
+</html>
